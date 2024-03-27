@@ -11,27 +11,24 @@
 // - Вивести в консоль результат роботи функції createNewUser(), а також функцій getAge() та getPassword() створеного об'єкта.
 
 class CreateNewUser {
-  constructor(firstName, lastName, birthday) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.birthday = birthday;
+  constructor(public firstName: string, public lastName: string, public birthday: number) {
   }
-  getLogin() {
+  getLogin():string {
     return `${this.firstName[0]}${this.lastName}`.toLowerCase();
   }
-  getAge() {
-    return new Date().getFullYear() - this.birthday.split(".")[2];
+  getAge(): number {
+    return new Date().getFullYear() - this.birthday;
   }
-  getPassword() {
+  getPassword(): string | number {
     return `${this.firstName[0].toUpperCase()}${this.lastName.toLowerCase()}${
-      this.birthday.split(".")[2]
+      this.birthday
     }`;
   }
 }
-const newUser = new CreateNewUser("Ivan", "Ivanov", "31.12.1983");
-// console.log(newUser.getLogin());
-// console.log(newUser.getAge());
-// console.log(newUser.getPassword());
+const newUser = new CreateNewUser("Ivan", "Ivanov", 1983);
+console.log(newUser.getLogin());
+console.log(newUser.getAge());
+console.log(newUser.getPassword());
 
 // Домашка : Створити клас Animal та розширюючі його класи Dog, Cat, Horse.
 // Клас Animal містить змінні food, location і методи makeNoise, eat, sleep. Метод makeNoise, наприклад, може виводити на консоль "Така тварина спить".
@@ -41,56 +38,51 @@ const newUser = new CreateNewUser("Ivan", "Ivanov", "31.12.1983");
 // У методі main створіть масив типу Animal, в який запишіть тварин всіх типів, що є у вас. У циклі надсилайте їх на прийом до ветеринара.
 
 class Animal {
-  constructor(food, location) {
-    this.food = food;
-    this.location = location;
+  constructor(public food: string, public location: string) {
   }
-  makeNoise() {
+  makeNoise():void {
     console.log("Ця тварина робить такі звуки");
   }
-  eat() {
+  eat(): void {
     console.log("Ця тварина їсть");
   }
-  sleep() {
+  sleep(): void {
     console.log("Ця тварина спить");
   }
 }
 
 class Dog extends Animal {
-  constructor(food, location, color) {
+  constructor(public food: string, public location: string, public color: string) {
     super(food, location);
-    this.color = color;
   }
-  makeNoise() {
+  makeNoise(): void {
     console.log(`Ця тварина гавкає`);
   }
-  eat() {
+  eat(): void {
     console.log(`Улюблена їжа ${this.food}`);
   }
 }
 
 class Cat extends Animal {
-  constructor(food, location, age) {
+  constructor(public food: string, public location: string, public age: number | string) {
     super(food, location);
-    this.age = age;
   }
-  makeNoise() {
+  makeNoise(): void {
     console.log(`Ця тварина мяукає`);
   }
-  eat() {
+  eat(): void {
     console.log(`Улюблена їжа ${this.food}`);
   }
 }
 
 class Horse extends Animal {
-  constructor(food, location, speed) {
+  constructor(public food: string, public location: string, public speed: number | string) {
     super(food, location);
-    this.speed = speed;
   }
-  makeNoise() {
+  makeNoise(): void {
     console.log(`Ця тварина ігогокає`);
   }
-  eat() {
+  eat(): void {
     console.log(`Улюблена їжа ${this.food}`);
   }
 }
@@ -100,7 +92,7 @@ const horse = new Horse("просо", "ферма", "30");
 
 class Ветеринар {
   constructor() {}
-  treatAnimal(animal) {
+  treatAnimal(animal: any): void {
     console.log(`Їжа: ${animal.food}`);
     console.log(`Місце: ${animal.location}`);
   }
